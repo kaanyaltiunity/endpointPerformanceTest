@@ -27,21 +27,21 @@ func main() {
 
 func requestWithTimer(perPage int) float32 {
 	start := time.Now()
-	path := fmt.Sprintf("https://content-api.cloud.unity3d.com/api/v1/projects/17d4f8a0-6cd1-48dc-9650-c22f89470399/buckets/?page=1&per_page=%d", perPage)
+	path := fmt.Sprintf("https://content-api.cloud.unity3d.com/api/v1/projects/bcd835c4-d711-4bed-aa17-6c1458bafb73/buckets/?page=1&per_page=%d", perPage)
 	req, err := http.NewRequest(http.MethodGet, path, nil)
 	if err != nil {
 		log.Fatalln(err)
 	}
-	req.Header.Set("Authorization", "Basic OmYyN2MyMTVkYzM2OGNjZGUzMGZjODc3YWQ2NWM5NmJm")
+	req.Header.Set("Authorization", "Basic <API KEY>")
 	res, err := http.DefaultClient.Do(req)
 	if err != nil {
 		log.Fatalln(err)
 	}
-	_, err = ioutil.ReadAll(res.Body)
+	resBody, err := ioutil.ReadAll(res.Body)
 	if err != nil {
 		log.Fatalln(err)
 	}
-	// log.Println(string(resBody))
+	log.Println(string(resBody))
 	duration := time.Since(start)
 	defer res.Body.Close()
 	return float32(duration.Seconds())
